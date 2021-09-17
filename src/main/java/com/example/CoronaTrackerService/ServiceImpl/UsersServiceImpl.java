@@ -15,7 +15,6 @@ public class UsersServiceImpl implements UsersService {
 
 	@Autowired
 	UsersReposetories userreposetries;
-	
 	@Override
 	public ArrayList<UsersDTO> getUsersDetails() {
 		// TODO Auto-generated method stub
@@ -25,11 +24,22 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public UsersDTO createNewUser(Users user) {
+	public UsersDTO createNewUser(Users user,String uuid) {
 		// TODO Auto-generated method stub
-		UsersDTO userDTO=new UsersDTO(user.getUserId(),user.getUserName(),user.getEmailId(),user.getPassword());
+		UsersDTO userDTO=new UsersDTO(uuid,user.getUserName(),user.getEmailId(),user.getPassword());
 		
 		return userreposetries.save(userDTO);
+	}
+
+	@Override
+	public boolean loginAuthentication(String emailId, String password) {
+		// TODO Auto-generated method stub
+		UsersDTO userdto=userreposetries.findUserByEmailIDAndPassword(emailId, password);
+		if(null!=userdto)
+		{
+			return true;
+		}
+		return false;
 	}
 	
 

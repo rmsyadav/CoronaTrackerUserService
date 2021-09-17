@@ -11,5 +11,6 @@ import com.example.CoronaTrackerService.Modal.Users;
 public interface UsersService {
   
 	public ArrayList<UsersDTO> getUsersDetails();
-	public UsersDTO createNewUser(Users user);
+	public UsersDTO createNewUser(Users user,String uuid);
+	public boolean loginAuthentication(String emailId,String password);
 }
